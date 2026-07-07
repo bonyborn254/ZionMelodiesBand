@@ -1,6 +1,39 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
+from .models import (
+    Event,
+    Gallery,
+    Music,
+    Announcement,
+    Member
+)
+from .forms import ContactForm
 
-# Create your views here.
+
 def home(request):
-    return render(request, 'home.html')
 
+    events = Event.objects.all()
+    gallery = Gallery.objects.all()
+    music = Music.objects.all()
+    announcements = Announcement.objects.all()
+    members = Member.objects.all()
+
+    if request.method == "POST":
+        form = ContactForm(request.POST)
+
+        if form.is_valid():
+            form.save()
+            return redirect("home")
+
+    else:
+        form = ContactForm()
+
+    context = {
+        "events": events,
+        "gallery": gallery,
+        "music": music,
+        "announcements": announcements,
+        "members": members,
+        "form": form,
+    }
+
+    return render(request, "index.html", context)
