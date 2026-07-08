@@ -14,7 +14,7 @@ def home(request):
     events = Event.objects.all()
     gallery = Gallery.objects.all()
     music = Song.objects.all()
-    announcements = Announcement.objects.all()
+    announcements = Announcement.objects.order_by("-submitted_at")
     members = Member.objects.all()
 
     if request.method == "POST":
@@ -22,6 +22,10 @@ def home(request):
 
         if form.is_valid():
             form.save()
+            messages.success(
+                request,
+                "Your message has been sent successfully."
+            )
             return redirect("home")
 
     else:
