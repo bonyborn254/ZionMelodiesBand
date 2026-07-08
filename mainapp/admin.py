@@ -15,7 +15,7 @@ class EventAdmin(admin.ModelAdmin):
     search_fields = ("title", "description")
 
 
-@admin.register(GalleryImage)
+@admin.register(Gallery)
 class GalleryAdmin(admin.ModelAdmin):
     list_display = ("title",)
 
