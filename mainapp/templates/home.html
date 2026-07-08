@@ -464,29 +464,41 @@ class="relative min-h-screen flex items-center justify-center overflow-hidden">
 </section>
 
 
-    <!-- ========================= -->
+
+<!-- ======================================= -->
 <!-- MEMBERS DIRECTORY -->
-<!-- ========================= -->
+<!-- ======================================= -->
 
 <section id="members" class="py-20 px-6 surface-bg">
 
-    <div class="max-w-6xl mx-auto">
+    <div class="max-w-7xl mx-auto">
 
-        <h2 class="font-display text-4xl text-center mb-12">
-            Members Directory
-        </h2>
+        <div class="text-center mb-14">
 
-        <div class="overflow-x-auto">
+            <h2 class="font-display text-4xl text-yellow-400">
+                Our Ministry Team
+            </h2>
 
-            <table class="w-full border border-white/10 rounded-xl">
+            <p class="text-slate-400 mt-4 max-w-2xl mx-auto">
+                Every member serves faithfully with unique gifts and talents,
+                united by one purpose—glorifying God through music.
+            </p>
 
-                <thead>
+        </div>
 
-                    <tr class="bg-yellow-500/10">
-                        
-                        <th class="p-4 text-left">Name</th>
-                        <th class="p-4 text-left">Role</th>
-                        <th class="p-4 text-left">Section</th>
+        <div class="overflow-x-auto rounded-2xl border border-yellow-400/20">
+
+            <table class="w-full">
+
+                <thead class="bg-yellow-500/10">
+
+                    <tr>
+
+                        <th class="p-5 text-left">Member</th>
+
+                        <th class="p-5 text-left">Role</th>
+
+                        <th class="p-5 text-left">Section</th>
 
                     </tr>
 
@@ -496,18 +508,24 @@ class="relative min-h-screen flex items-center justify-center overflow-hidden">
 
                     {% for member in members %}
 
-                    <tr class="border-t border-white/10">
-                        
-                        <td class="p-4">
+                    <tr class="border-t border-white/10 hover:bg-white/5 transition">
+
+                        <td class="p-5 font-semibold">
+
                             {{ member.name }}
+
                         </td>
 
-                        <td class="p-4 text-yellow-400">
+                        <td class="p-5 text-yellow-400">
+
                             {{ member.role }}
+
                         </td>
 
-                        <td class="p-4">
+                        <td class="p-5 text-slate-300">
+
                             {{ member.section }}
+
                         </td>
 
                     </tr>
@@ -516,7 +534,7 @@ class="relative min-h-screen flex items-center justify-center overflow-hidden">
 
                     <tr>
 
-                        <td colspan="4" class="text-center p-6">
+                        <td colspan="3" class="text-center py-10 text-slate-400">
 
                             No members available.
 
@@ -537,13 +555,13 @@ class="relative min-h-screen flex items-center justify-center overflow-hidden">
 </section>
 
 
-<!-- ========================= -->
+<!-- ======================================= -->
 <!-- SUPPORT -->
-<!-- ========================= -->
+<!-- ======================================= -->
 
 <section id="support" class="py-20 px-6">
 
-    <div class="max-w-4xl mx-auto text-center">
+    <div class="max-w-5xl mx-auto text-center">
 
         <h2 class="font-display text-4xl text-yellow-400">
 
@@ -551,167 +569,218 @@ class="relative min-h-screen flex items-center justify-center overflow-hidden">
 
         </h2>
 
-        <p class="mt-6">
+        <p class="text-slate-400 mt-6 text-lg max-w-3xl mx-auto leading-8">
 
-            Every contribution helps Zion Melodies Band continue
-            spreading the Gospel through music.
+            Your generous contribution helps Zion Melodies continue bringing
+            God's message through music. Whether it's buying us a cup of tea
+            or sponsoring ministry activities, every gift makes an eternal
+            impact.
 
         </p>
-        <p class="muted-text text-lg mb-8 max-w-3xl mx-auto leading-relaxed">
-    Your generous contribution helps Zion Melodies Band continue bringing God's
-    message through music. Whether it's buying us a cup of coffee or a full
-    meal, every donation fuels our passion for worship and helps us reach
-    more hearts with the gospel.
-</p>
 
-<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-10">
+        <div class="grid md:grid-cols-3 gap-8 mt-14">
 
-    <div class="p-6 rounded-xl bg-white/5 border border-yellow-400/30">
-        <div class="text-4xl mb-3">☕</div>
-        <h3 class="font-semibold text-yellow-400 mb-2">A Cup of Tea</h3>
-        <p class="muted-text text-sm">
-            A small gesture of encouragement that helps us cover daily
-            operational costs.
+            <div class="card p-8">
+
+                <div class="text-5xl mb-4">
+                    ☕
+                </div>
+
+                <h3 class="text-yellow-400 text-xl font-bold">
+
+                    A Cup of Tea
+
+                </h3>
+
+                <p class="text-slate-400 mt-4">
+
+                    Helps us meet our daily ministry operational expenses.
+
+                </p>
+
+            </div>
+
+            <div class="card p-8">
+
+                <div class="text-5xl mb-4">
+                    🎵
+                </div>
+
+                <h3 class="text-yellow-400 text-xl font-bold">
+
+                    A Meal & Music
+
+                </h3>
+
+                <p class="text-slate-400 mt-4">
+
+                    Supports choir members and ministry resources.
+
+                </p>
+
+            </div>
+
+            <div class="card p-8">
+
+                <div class="text-5xl mb-4">
+                    🙏
+                </div>
+
+                <h3 class="text-yellow-400 text-xl font-bold">
+
+                    Bless Our Ministry
+
+                </h3>
+
+                <p class="text-slate-400 mt-4">
+
+                    Enables outreach missions, concerts and evangelism.
+
+                </p>
+
+            </div>
+
+        </div>
+
+        <p class="mt-12 italic text-slate-400">
+
+            Every contribution, no matter the amount,
+            blesses Zion Melodies Band abundantly.
+
         </p>
-    </div>
 
-    <div class="p-6 rounded-xl bg-white/5 border border-yellow-400/30">
-        <div class="text-4xl mb-3">🎵</div>
-        <h3 class="font-semibold text-yellow-400 mb-2">
-            A Meal &amp; Music
-        </h3>
-        <p class="muted-text text-sm">
-            Supports our choir members and helps fund our music materials
-            and ministry resources.
-        </p>
-    </div>
+        <div class="mt-10 inline-block p-8 rounded-2xl bg-yellow-400/10 border-2 border-yellow-400 shadow-xl">
 
-    <div class="p-6 rounded-xl bg-white/5 border border-yellow-400/30 sm:col-span-2 lg:col-span-1">
-        <div class="text-4xl mb-3">🙏</div>
-        <h3 class="font-semibold text-yellow-400 mb-2">
-            Bless Our Ministry
-        </h3>
-        <p class="muted-text text-sm">
-            A generous donation that enables us to reach more communities
-            through worship and the Gospel.
-        </p>
-    </div>
-    <p data-template-id="support-closing"
-       class="mt-4 text-sm italic text-slate-400 leading-relaxed max-w-md mx-auto">
-        Every contribution, no matter the size, blesses us abundantly.
-        Thank you for standing with <span class="text-yellow-400 font-semibold">Zion Melodies Band!</span>
-    </p>
-<div class="mt-10 inline-block p-6 rounded-xl bg-yellow-400/10 border-2 border-yellow-400 shadow-lg hover:shadow-yellow-400/30 transition-all duration-300">
-    <p class="text-sm muted-text mb-2 tracking-wide">
-        M-Pesa Buy Goods Till:
-    </p>
+            <p class="text-sm text-slate-400 tracking-wider">
 
-    <p class="text-5xl md:text-6xl font-bold text-yellow-400 font-mono tracking-widest">
-        6953474
-    </p>
+                M-Pesa Buy Goods Till
 
-    <p class="text-xs muted-text mt-3">
-        Send your donation to support our ministry.
-    </p>
+            </p>
 
-</div>
-        <p class="mt-12 pt-8 border-t border-yellow-400/30 text-center italic text-cyan-400 font-semibold">
-    💖 "Your generosity touches our hearts and strengthens our ministry.
-    May God's blessings overflow upon you abundantly.
-    Thank you for believing in our vision!" 🙏
+            <h3 class="text-5xl md:text-6xl font-bold text-yellow-400 font-mono mt-4">
+
+                6953474
+
+            </h3>
+
+            <p class="text-sm text-slate-400 mt-4">
+
+                Send your donation to support our ministry.
+
+            </p>
+
+        </div>
+
+        <p class="mt-14 pt-10 border-t border-yellow-400/20 text-cyan-400 italic font-semibold">
+
+            💖 Your generosity strengthens this ministry.
+            May the Lord richly bless you for partnering with us.
+
         </p>
 
     </div>
 
 </section>
 
-<!-- Contact -->
-<section id="contact" class="py-20 px-4 surface-bg">
-    <div class="max-w-4xl mx-auto grid md:grid-cols-2 gap-12">
 
-        <!-- Contact Information -->
+<!-- ======================================= -->
+<!-- CONTACT -->
+<!-- ======================================= -->
+
+<section id="contact" class="py-20 px-6 surface-bg">
+
+    <div class="max-w-6xl mx-auto grid lg:grid-cols-2 gap-14">
+
         <div>
-            <h2 class="font-display text-3xl mb-6 text-white">
+
+            <h2 class="font-display text-4xl text-yellow-400 mb-8">
+
                 Get In Touch
+
             </h2>
 
-            <p class="text-slate-400 mb-6">
-                Have questions, prayer requests, or want to join Zion Melodies Band?
-                Reach out to us anytime.
+            <p class="text-slate-400 leading-8 mb-10">
+
+                Have questions, prayer requests, invitations or would
+                like to join Zion Melodies Band? We'd love to hear from you.
+
             </p>
 
-            <div class="space-y-4">
+            <div class="space-y-6">
 
-                <p class="flex items-center gap-3">
-                    <i data-lucide="mail" class="w-4 h-4 text-yellow-500"></i>
-                    <span class="text-white font-medium">
+                <div class="flex items-center gap-4">
+
+                    <i data-lucide="mail" class="text-yellow-400"></i>
+
+                    <span>
+
                         zmelodiesband@gmail.com
-                    </span>
-                </p>
 
-                <p class="flex items-center gap-3">
-                    <i data-lucide="phone" class="w-4 h-4 text-yellow-500"></i>
-                    <span class="text-white">
-                        +254 741 386481, +254 754 060 776
                     </span>
-                </p>
 
-                <p class="flex items-center gap-3">
-                    <i data-lucide="map-pin" class="w-4 h-4 text-yellow-500"></i>
-                    <span class="text-white">
+                </div>
+
+                <div class="flex items-center gap-4">
+
+                    <i data-lucide="phone" class="text-yellow-400"></i>
+
+                    <span>
+
+                        +254 741 386481<br>
+                        +254 754 060 776
+
+                    </span>
+
+                </div>
+
+                <div class="flex items-center gap-4">
+
+                    <i data-lucide="map-pin" class="text-yellow-400"></i>
+
+                    <span>
+
                         Nairobi, Kenya
+
                     </span>
-                </p>
+
+                </div>
 
             </div>
+
         </div>
 
-        <!-- Contact Form -->
         <div>
-            <form
-                id="contact-form"
-                action="{% url 'home' %}"
-                method="POST"
-                class="surface-bg rounded-xl p-6 border border-white/10 shadow-lg space-y-4">
+
+            <form method="POST"
+                  action="{% url 'home' %}"
+                  id="contact-form"
+                  class="card p-8 space-y-5">
 
                 {% csrf_token %}
 
-<div id="form-success" class="hidden text-green-400 bg-green-500/10 border border-green-500/20 rounded-lg p-4 text-center">
-    Your message has been sent successfully.
-</div>
+                {{ form.name }}
 
-<div id="form-error" class="hidden text-red-400 bg-red-500/10 border border-red-500/20 rounded-lg p-4 text-center"></div>
+                {{ form.email }}
 
-<div>
-    <label for="{{ form.name.id_for_label }}" class="block mb-1 text-sm font-medium">Name</label>
-    {{ form.name }}
-</div>
+                {{ form.phone }}
 
-<div>
-    <label for="{{ form.email.id_for_label }}" class="block mb-1 text-sm font-medium">Email</label>
-    {{ form.email }}
-</div>
+                {{ form.message }}
 
-<div>
-    <label for="{{ form.phone.id_for_label }}" class="block mb-1 text-sm font-medium">Phone</label>
-    {{ form.phone }}
-</div>
+                <button
+                    id="submit-btn"
+                    type="submit"
+                    class="btn-gold w-full">
 
-<div>
-    <label for="{{ form.message.id_for_label }}" class="block mb-1 text-sm font-medium">Message</label>
-    {{ form.message }}
-</div>
+                    Send Message
 
-<button
-    id="submit-btn"
-    type="submit"
-    class="w-full py-3 rounded-lg font-semibold bg-gradient-to-r from-yellow-600 to-yellow-400 text-slate-900 hover:opacity-90 transition">
-    Send Message
-</button>
+                </button>
+
             </form>
+
         </div>
 
     </div>
+
 </section>
 
 {% endblock %}
