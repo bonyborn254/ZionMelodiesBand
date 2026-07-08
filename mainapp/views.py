@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from .models import (
     Event,
     Gallery,
-    Music,
+    Song,
     Announcement,
     Member
 )
@@ -13,7 +13,7 @@ def home(request):
 
     events = Event.objects.all()
     gallery = Gallery.objects.all()
-    music = Music.objects.all()
+    music = Song.objects.all()
     announcements = Announcement.objects.all()
     members = Member.objects.all()
 

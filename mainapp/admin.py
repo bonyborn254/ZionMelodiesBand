@@ -4,7 +4,7 @@ from .models import *
 
 admin.site.register(Event)
 admin.site.register(Gallery)
-admin.site.register(Music)
+admin.site.register(Song)
 admin.site.register(Announcement)
 admin.site.register(Member)
 admin.site.register(ContactMessage)
