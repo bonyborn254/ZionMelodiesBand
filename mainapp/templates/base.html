@@ -34,8 +34,13 @@
     <nav class="nav-blur fixed top-0 w-full z-50 border-b border-white/10">
         <div class="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between">
             <a href="/"
-               class="font-display text-xl font-bold gold-gradient">
-                🎵 Zion Melodies Band 
+               class="flex items-center gap-2">
+                <img src="{% static 'images/logo.jpg' %}"
+                     alt="Zion Melodies Band Logo"
+                     class="h-10 w-10 rounded-full object-cover">
+                <span class="font-display text-xl font-bold gold-gradient hidden sm:inline">
+                    Zion Melodies Band
+                </span>
             </a>
             <div class="hidden md:flex gap-6 items-center">
                 <a href="#home">Home</a>
@@ -47,9 +52,6 @@
                 <a href="#members">Members</a>
                 <a href="#support">Support</a>
                 <a href="#contact">Contact</a>
-                <button id="dark-toggle">
-                    <i data-lucide="moon"></i>
-                </button>
             </div>
             <button class="md:hidden"
                     id="mobile-menu-btn">
