@@ -83,21 +83,43 @@
     {% block content %}
     {% endblock %}
     <!-- Footer -->
-    <footer class="border-t border-white/10 py-8 text-center">
-        <h3 class="font-bold text-yellow-400">
+    <footer
+    data-template-id="footer-section"
+    class="border-t border-white/10 py-8 px-4"
+    style="background: linear-gradient(90deg, rgb(140, 82, 255), rgb(92, 225, 230));"
+>
+    <div class="max-w-6xl mx-auto text-center">
+
+        <h3
+            class="font-bold mb-3"
+            style="color:#FFD700; font-size:28px; letter-spacing:1px;"
+        >
             © 2026 Zion Melodies Choir
         </h3>
-        <p>
-            Let everything that has breath praise the Lord.
+
+        <p
+            data-template-id="footer-text"
+            style="color:#F8FAFC; font-size:18px; font-style:italic; line-height:1.8;"
+        >
+            <strong>Uniting Voices • Inspiring Worship</strong><br>
+            <span style="font-size:16px;">
+                "Let everything that has breath praise the Lord. Praise the Lord."
+                <br>
+                <strong>— Psalm 150:6</strong>
+            </span>
         </p>
-        <p>
-            Psalm 150:6
+
+        <p
+            data-template-id="footer-dev"
+            class="mt-4"
+            style="color:#E2E8F0; font-size:15px; font-weight:600;"
+        >
+            All Rights Reserved &nbsp;|&nbsp; Developed with ❤️ by
+            <strong>Dev.Bony</strong>
         </p>
-        <br>
-        <small>
-            Developed by Dev.Bony
-        </small>
-    </footer>
+
+    </div>
+</footer>
     <!-- JavaScript -->
     <script src="{% static 'js/scripts.js' %}"></script>
     {% block extra_js %}
