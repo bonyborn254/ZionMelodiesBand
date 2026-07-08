@@ -277,26 +277,37 @@ class="relative min-h-screen flex items-center justify-center overflow-hidden">
 
         </div>
 
-        <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-
-            {% for image in gallery %}
-
-            <div class="overflow-hidden rounded-2xl border border-yellow-400/20 hover:border-yellow-400 transition duration-500">
-
-                <img
-                    src="{{ image.image.url }}"
-                    alt="{{ image.title }}"
-                    class="w-full h-72 object-cover hover:scale-110 transition duration-700">
-
+        <!-- Horizontal Scrollable Gallery -->
+        <div class="relative">
+            <div id="gallery-scroll" class="flex gap-6 overflow-x-auto pb-4 scroll-smooth" style="scroll-behavior: smooth;">
+                {% for image in gallery %}
+                <div class="flex-shrink-0 w-80">
+                    <div class="overflow-hidden rounded-2xl border border-yellow-400/20 hover:border-yellow-400 transition duration-500 h-72">
+                        <img
+                            src="{{ image.image.url }}"
+                            alt="{{ image.title }}"
+                            class="w-full h-full object-cover hover:scale-110 transition duration-700">
+                    </div>
+                </div>
+                {% empty %}
+                <p class="text-center text-slate-400">
+                    No gallery images uploaded.
+                </p>
+                {% endfor %}
             </div>
 
-            {% empty %}
+            <!-- Scroll Navigation Buttons -->
+            <button id="scroll-left" class="absolute left-0 top-1/2 -translate-y-1/2 bg-black/50 hover:bg-black/80 text-yellow-400 p-3 rounded-full transition z-10 -ml-6">
+                <i data-lucide="chevron-left" class="w-6 h-6"></i>
+            </button>
+            <button id="scroll-right" class="absolute right-0 top-1/2 -translate-y-1/2 bg-black/50 hover:bg-black/80 text-yellow-400 p-3 rounded-full transition z-10 -mr-6">
+                <i data-lucide="chevron-right" class="w-6 h-6"></i>
+            </button>
+        </div>
 
-            <p class="text-center col-span-full text-slate-400">
-                No gallery images uploaded.
-            </p>
+    </div>
 
-            {% endfor %}
+</section>
 
         </div>
 

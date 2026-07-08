@@ -228,4 +228,29 @@ document.addEventListener("DOMContentLoaded", function () {
 
     }
 
+    // ===============================
+    // Gallery Horizontal Scroll
+    // ===============================
+    const galleryScroll = document.getElementById("gallery-scroll");
+    const scrollLeft = document.getElementById("scroll-left");
+    const scrollRight = document.getElementById("scroll-right");
+
+    if (scrollLeft && scrollRight && galleryScroll) {
+        const scrollAmount = 400; // Scroll by one image width + gap
+
+        scrollLeft.addEventListener("click", () => {
+            galleryScroll.scrollBy({
+                left: -scrollAmount,
+                behavior: "smooth"
+            });
+        });
+
+        scrollRight.addEventListener("click", () => {
+            galleryScroll.scrollBy({
+                left: scrollAmount,
+                behavior: "smooth"
+            });
+        });
+    }
+
 });
