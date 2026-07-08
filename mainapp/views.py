@@ -36,4 +36,4 @@ def home(request):
         "form": form,
     }
 
-    return render(request, "index.html", context)
+    return render(request, "home.html", context)
