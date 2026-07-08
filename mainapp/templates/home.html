@@ -41,3 +41,112 @@ class="font-display text-xl font-bold text-yellow-400">
 </div>
 
 </nav>
+<img src="{% static 'images/hero.jpg' %}"
+class="w-full h-full object-cover opacity-40">
+<h1 class="font-display text-6xl gold-gradient">
+
+🎵 Zion Melodies
+
+</h1>
+
+<p>
+
+One voice, one spirit, one purpose —
+
+glorifying God through worship and praise.
+
+
+</p>
+<img src="{% static 'images/about.jpg' %}"
+class="rounded-2xl shadow-xl">
+
+<section id="events">
+
+<div class="grid md:grid-cols-3 gap-6">
+
+{% for event in events %}
+
+<div class="rounded-xl p-6 surface-bg">
+
+<p class="text-yellow-400">
+
+{{ event.date }}
+
+</p>
+
+<h3 class="text-xl font-bold">
+
+{{ event.title }}
+
+</h3>
+
+<p>
+
+{{ event.description }}
+
+</p>
+
+</div>
+
+{% endfor %}
+
+</div>
+
+</section>
+<section id="gallery">
+
+<div class="grid md:grid-cols-3 gap-4">
+
+{% for photo in gallery %}
+
+<img
+src="{{ photo.image.url }}"
+alt="{{ photo.title }}"
+class="gallery-img rounded-xl">
+
+{% endfor %}
+
+</div>
+
+</section>
+
+<section id="music">
+
+{% for song in music %}
+
+<div class="flex justify-between p-4 rounded-lg">
+
+<div>
+
+<h3>
+
+{{ song.title }}
+
+</h3>
+
+<p>
+
+Key:
+{{ song.key }}
+
+•
+
+Leader:
+{{ song.leader }}
+
+</p>
+
+</div>
+
+<span>
+
+{{ song.category }}
+
+</span>
+
+</div>
+
+{% endfor %}
+
+</section>
+{% endblock %}
