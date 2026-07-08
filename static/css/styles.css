@@ -1,16 +1,35 @@
+/* =====================================================
+   ZION MELODIES BAND
+   Mobile First Responsive Stylesheet
+   Author: Dev.Bony
+===================================================== */
+
 /* Google Fonts */
 @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@400;500;600;700&display=swap');
+
+/* ==========================
+   ROOT VARIABLES
+========================== */
 
 :root{
     --gold:#FFD700;
     --gold-dark:#B8860B;
-    --bg:#000000;
-    --surface:#111827;
+    --black:#000;
+    --surface:#1e293b;
+    --surface-dark:#111827;
     --text:#F8FAFC;
     --muted:#94A3B8;
+    --radius:18px;
+    --transition:.35s ease;
 }
 
-*{
+/* ==========================
+   RESET
+========================== */
+
+*,
+*::before,
+*::after{
     margin:0;
     padding:0;
     box-sizing:border-box;
@@ -21,140 +40,195 @@ html{
 }
 
 body{
+    min-height:100vh;
     font-family:'DM Sans',sans-serif;
-    background:linear-gradient(90deg,#000,#c89116);
     color:var(--text);
+    background:linear-gradient(90deg,#000,#c89116);
     overflow-x:hidden;
+    display:flex;
+    flex-direction:column;
 }
+
+main{
+    flex:1;
+}
+
+img,
+video,
+iframe{
+    display:block;
+    max-width:100%;
+}
+
+a{
+    text-decoration:none;
+    color:inherit;
+}
+
+button,
+input,
+textarea,
+select{
+    font:inherit;
+}
+
+button{
+    cursor:pointer;
+    border:none;
+}
+
+ul{
+    list-style:none;
+}
+
+/* ==========================
+   TYPOGRAPHY
+========================== */
 
 .font-display{
     font-family:'Playfair Display',serif;
 }
 
-section{
-    padding:90px 0;
+h1,h2,h3,h4{
+    line-height:1.2;
 }
 
+p{
+    line-height:1.7;
+}
+
+/* ==========================
+   LAYOUT
+========================== */
+
 .container{
-    width:92%;
-    max-width:1200px;
+    width:min(92%,1200px);
     margin:auto;
 }
 
-/* Navigation */
+section{
+    padding:60px 16px;
+}
+
+/* ==========================
+   NAVIGATION
+========================== */
 
 .nav-blur{
     position:fixed;
-    width:100%;
-    top:0;
-    left:0;
+    inset:0 0 auto 0;
+    height:70px;
     z-index:1000;
 
     backdrop-filter:blur(12px);
 
-    background:rgba(0,0,0,.78);
+    background:rgba(0,0,0,.82);
 
     border-bottom:1px solid rgba(255,255,255,.08);
 }
 
-/* Cards */
+/* ==========================
+   HERO
+========================== */
+
+.hero-overlay{
+    position:absolute;
+    inset:0;
+    background:linear-gradient(rgba(0,0,0,.55),rgba(0,0,0,.72));
+}
+
+.hero-title{
+    font-size:2.5rem;
+    font-weight:900;
+    color:var(--gold);
+}
+
+.hero-subtitle{
+    margin-top:18px;
+    color:#E2E8F0;
+    font-size:1rem;
+}
+
+/* ==========================
+   BUTTONS
+========================== */
+
+.btn-gold{
+    display:inline-block;
+
+    padding:14px 32px;
+
+    border-radius:12px;
+
+    background:linear-gradient(135deg,var(--gold-dark),var(--gold));
+
+    color:#111827;
+
+    font-weight:700;
+
+    transition:var(--transition);
+}
+
+.btn-gold:hover{
+
+    transform:translateY(-4px);
+
+    box-shadow:0 18px 35px rgba(255,215,0,.25);
+
+}
+
+/* ==========================
+   CARDS
+========================== */
 
 .surface-bg{
-    background:#1e293b;
+    background:var(--surface);
 }
 
 .card{
-    background:#1e293b;
+
+    background:var(--surface);
 
     border:1px solid rgba(255,215,0,.15);
 
-    border-radius:18px;
+    border-radius:var(--radius);
 
-    transition:.35s;
+    transition:var(--transition);
+
 }
 
 .card:hover{
 
     transform:translateY(-8px);
 
-    border-color:gold;
+    border-color:var(--gold);
 
-    box-shadow:0 20px 45px rgba(255,215,0,.18);
-
-}
-
-/* Hero */
-
-.hero-overlay{
-
-    position:absolute;
-
-    inset:0;
-
-    background:linear-gradient(
-        rgba(0,0,0,.55),
-        rgba(0,0,0,.70)
-    );
+    box-shadow:0 18px 40px rgba(255,215,0,.18);
 
 }
 
-.hero-title{
+/* ==========================
+   GRID
+========================== */
 
-    font-size:4rem;
-
-    color:gold;
-
-    font-weight:900;
-
+.grid{
+    display:grid;
+    gap:1.5rem;
 }
 
-.hero-subtitle{
-
-    font-size:1.3rem;
-
-    color:#e2e8f0;
-
-    margin-top:20px;
-
-}
-
-/* Buttons */
-
-.btn-gold{
-
-    background:linear-gradient(135deg,#B8860B,#FFD700);
-
-    color:#111827;
-
-    padding:14px 32px;
-
-    border-radius:12px;
-
-    font-weight:bold;
-
-    transition:.3s;
-
-}
-
-.btn-gold:hover{
-
-    transform:translateY(-3px);
-
-    box-shadow:0 15px 30px rgba(255,215,0,.25);
-
-}
-
-/* Gallery */
+/* ==========================
+   GALLERY
+========================== */
 
 .gallery-img{
 
     width:100%;
 
-    height:250px;
+    height:220px;
 
     object-fit:cover;
 
-    border-radius:18px;
+    border-radius:var(--radius);
 
     transition:.4s;
 
@@ -166,7 +240,17 @@ section{
 
 }
 
-/* Tables */
+/* ==========================
+   TABLE
+========================== */
+
+.table-responsive{
+
+    overflow-x:auto;
+
+    width:100%;
+
+}
 
 table{
 
@@ -174,17 +258,22 @@ table{
 
     border-collapse:collapse;
 
+    min-width:700px;
+
 }
 
 th{
 
-    background:#0f172a;
+    background:#0F172A;
 
 }
 
-th,td{
+th,
+td{
 
     padding:16px;
+
+    text-align:left;
 
 }
 
@@ -194,19 +283,152 @@ tbody tr{
 
 }
 
-/* Footer */
+/* ==========================
+   FORMS
+========================== */
 
-footer{
+input,
+textarea{
 
-    background:linear-gradient(
-        90deg,
-        #8c52ff,
-        #5ce1e6
-    );
+    width:100%;
+
+    padding:14px;
+
+    border-radius:12px;
+
+    border:1px solid rgba(255,255,255,.1);
+
+    background:#334155;
+
+    color:#fff;
+
+    outline:none;
+
+    transition:.3s;
 
 }
 
-/* Fade animation */
+input:focus,
+textarea:focus{
+
+    border-color:var(--gold);
+
+}
+
+textarea{
+
+    resize:vertical;
+
+}
+
+/* ==========================
+   SUPPORT MPESA CARD
+========================== */
+
+.mpesa-card{
+
+    display:inline-block;
+
+    padding:1.8rem;
+
+    border-radius:20px;
+
+    border:2px solid var(--gold);
+
+    background:rgba(255,215,0,.08);
+
+    text-align:center;
+
+}
+
+.mpesa-card p:first-child{
+
+    color:var(--muted);
+
+    font-size:.9rem;
+
+}
+
+.mpesa-card h2{
+
+    margin:.8rem 0;
+
+    font-size:2.4rem;
+
+    color:var(--gold);
+
+    font-family:monospace;
+
+}
+
+.mpesa-card p:last-child{
+
+    font-size:.8rem;
+
+    color:var(--muted);
+
+}
+
+/* ==========================
+   FOOTER
+========================== */
+
+footer{
+
+    margin:0;
+
+    padding:2.5rem 1rem;
+
+    text-align:center;
+
+    background:linear-gradient(90deg,#8c52ff,#5ce1e6);
+
+}
+
+footer p{
+
+    margin:.6rem 0;
+
+}
+
+footer p:first-child{
+
+    color:#FFD700;
+
+    font-weight:700;
+
+    font-size:1.1rem;
+
+}
+
+footer p:last-child{
+
+    color:#fff;
+
+    font-size:.95rem;
+
+}
+
+/* Removes white space under footer */
+
+body,
+html{
+
+    margin:0;
+
+    padding:0;
+
+}
+
+footer:last-child{
+
+    margin-bottom:0;
+
+}
+
+/* ==========================
+   ANIMATION
+========================== */
 
 .fade-up{
 
@@ -228,32 +450,128 @@ to{
 
 opacity:1;
 
-transform:none;
+transform:translateY(0);
+
+opacity:1;
 
 }
 
 }
 
-/* Mobile */
+/* ===================================================
+   RESPONSIVE BREAKPOINTS
+=================================================== */
 
-@media(max-width:768px){
+/* Small phones */
+
+@media (min-width:480px){
 
 .hero-title{
 
-font-size:2.7rem;
+font-size:2.8rem;
+
+}
+
+}
+
+/* Tablets */
+
+@media (min-width:768px){
+
+section{
+
+padding:80px 24px;
+
+}
+
+.container{
+
+width:92%;
+
+}
+
+.hero-title{
+
+font-size:3.5rem;
 
 }
 
 .hero-subtitle{
 
-font-size:1rem;
+font-size:1.2rem;
 
 }
 
-section{
+.gallery-img{
 
-padding:65px 0;
+height:250px;
+
+}
+
+.grid-2{
+
+display:grid;
+
+grid-template-columns:repeat(2,1fr);
+
+gap:2rem;
+
+}
+
+.grid-3{
+
+display:grid;
+
+grid-template-columns:repeat(3,1fr);
+
+gap:2rem;
 
 }
 
 }
+
+/* Laptop */
+
+@media (min-width:992px){
+
+.hero-title{
+
+font-size:4rem;
+
+}
+
+.gallery-img{
+
+height:280px;
+
+}
+
+.grid-4{
+
+display:grid;
+
+grid-template-columns:repeat(4,1fr);
+
+gap:2rem;
+
+}
+
+}
+
+/* Large Desktop */
+
+@media (min-width:1200px){
+
+.hero-title{
+
+font-size:4.5rem;
+
+}
+
+.container{
+
+max-width:1200px;
+
+}
+
+    }
