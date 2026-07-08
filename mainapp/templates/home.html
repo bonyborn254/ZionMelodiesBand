@@ -1,73 +1,158 @@
 {% extends "base.html" %}
-
 {% load static %}
+
 {% block title %}
 Zion Melodies Band
 {% endblock %}
 
 {% block content %}
-<nav class="nav-blur fixed top-0 w-full z-50 border-b border-white/10">
 
-<div class="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between">
+<!-- Hero Section -->
 
-<a href="#home"
-class="font-display text-xl font-bold text-yellow-400">
+<header id="home"
+class="relative w-full min-h-screen flex items-center justify-center text-center">
 
-🎵 Zion Melodies
+    <div class="absolute inset-0">
 
-</a>
+        <!-- Replace with your own hero image -->
+        <img src="{% static 'choir/images/hero.jpg' %}"
+             class="w-full h-full object-cover opacity-40">
 
-<div class="hidden md:flex gap-6">
+    </div>
 
-<a href="#home">Home</a>
+    <div class="relative z-10 px-6">
 
-<a href="#about">About</a>
+        <h1 class="font-display text-6xl gold-gradient">
 
-<a href="#events">Events</a>
+            🎵 Zion Melodies
 
-<a href="#gallery">Gallery</a>
+        </h1>
 
-<a href="#music">Music</a>
+        <p class="mt-6 text-xl text-gray-200">
 
-<a href="#announcements">News</a>
+            One voice, one spirit, one purpose —
+            glorifying God through worship and praise.
 
-<a href="#members">Members</a>
+        </p>
 
-<a href="#support">Support</a>
+        <div class="mt-8 surface-bg rounded-xl p-5 inline-block">
 
-<a href="#contact">Contact</a>
+            <p class="text-sm">
 
-</div>
+                ⏳ Rehearsal Countdown
 
-</div>
+            </p>
 
-</nav>
-<img src="{% static 'images/hero.jpg' %}"
-class="w-full h-full object-cover opacity-40">
-<h1 class="font-display text-6xl gold-gradient">
+            <h2 id="countdown-timer"
+                class="text-2xl font-bold text-yellow-400">
 
-🎵 Zion Melodies
+                Loading...
 
-</h1>
+            </h2>
+
+        </div>
+
+    </div>
+
+</header>
+
+<!-- About -->
+
+<section id="about"
+class="py-20 px-6">
+
+<div class="max-w-6xl mx-auto grid md:grid-cols-2 gap-10">
+
+<div>
+
+<h2 class="font-display text-4xl text-yellow-400 mb-6">
+
+About Zion Melodies
+
+</h2>
 
 <p>
 
-One voice, one spirit, one purpose —
-
-glorifying God through worship and praise.
-
+Zion Melodies is a vibrant choir ministry dedicated
+to glorifying God through worship, praise and
+evangelism through music.
 
 </p>
-<img src="{% static 'images/about.jpg' %}"
-class="rounded-2xl shadow-xl">
 
-<section id="events">
+<div class="grid grid-cols-2 gap-4 mt-8">
+
+<div class="surface-bg p-5 rounded-xl">
+
+<h3 class="text-yellow-400 font-bold">
+
+Mission
+
+</h3>
+
+<p>
+
+To glorify God through inspiring worship music,
+strengthen believers and spread the Gospel.
+
+</p>
+
+</div>
+
+<div class="surface-bg p-5 rounded-xl">
+
+<h3 class="text-yellow-400 font-bold">
+
+Vision
+
+</h3>
+
+<p>
+
+To become a leading worship ministry touching
+lives across the world.
+
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+<div>
+
+<img src="{% static 'images/about.jpg' %}"
+class="rounded-2xl shadow-xl w-full">
+
+</div>
+
+</div>
+
+</section>
+
+<!-- Events -->
+
+<section id="events"
+class="py-20 surface-bg">
+
+<div class="max-w-6xl mx-auto">
+
+<h2 class="font-display text-4xl text-center mb-12">
+
+Upcoming Events
+
+</h2>
 
 <div class="grid md:grid-cols-3 gap-6">
 
 {% for event in events %}
 
-<div class="rounded-xl p-6 surface-bg">
+<div class="rounded-xl p-6 border border-white/10">
+
+{% if event.image %}
+<img src="{{ event.image.url }}"
+class="rounded-lg mb-4 w-full h-48 object-cover">
+{% endif %}
 
 <p class="text-yellow-400">
 
@@ -78,6 +163,32 @@ class="rounded-2xl shadow-xl">
 <h3 class="text-xl font-bold">
 
 {{ event.title }}
+
+</h3>
+
+<p>
+
+{{ event.description }}
+
+</p>
+
+</div>
+
+{% empty %}
+
+<p>
+
+No upcoming events.
+
+</p>
+
+{% endfor %}
+
+</div>
+
+</div>
+
+  </section>
 
 </h3>
 
