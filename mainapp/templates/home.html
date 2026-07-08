@@ -255,89 +255,45 @@ class="relative min-h-screen flex items-center justify-center overflow-hidden">
     </div>
 
 </section>  
-<!-- Gallery -->
+
+<!-- ========================= -->
+<!-- GALLERY -->
+<!-- ========================= -->
+
 <section id="gallery" class="py-20 px-6">
 
-    <div class="max-w-6xl mx-auto">
+    <div class="max-w-7xl mx-auto">
 
-        <h2 class="font-display text-4xl text-center mb-12">
-            Photo Gallery
-        </h2>
+        <div class="text-center mb-14">
 
-        <div class="gallery-slider">
+            <h2 class="font-display text-4xl text-yellow-400">
+                Moments of Worship
+            </h2>
 
-            {% for image in gallery %}
-
-            <div class="gallery-item">
-
-                <img src="{{ image.image.url }}"
-                     alt="{{ image.title }}"
-                     class="gallery-img">
-
-            </div>
-
-            {% empty %}
-
-            <p>No gallery images uploaded.</p>
-
-            {% endfor %}
+            <p class="text-slate-400 mt-4 max-w-2xl mx-auto">
+                A glimpse into our worship experiences, concerts,
+                rehearsals and ministry journey.
+            </p>
 
         </div>
 
-    </div>
+        <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
 
-</section>
+            {% for image in gallery %}
 
-<!-- Music Library -->
+            <div class="overflow-hidden rounded-2xl border border-yellow-400/20 hover:border-yellow-400 transition duration-500">
 
-<section id="music" class="py-20 px-6 surface-bg">
-
-    <div class="max-w-5xl mx-auto">
-
-        <h2 class="font-display text-4xl text-center mb-12">
-
-            Music Library
-
-        </h2>
-
-        <div class="space-y-4">
-
-            {% for song in music %}
-
-            <div class="flex justify-between items-center border border-white/10 rounded-xl p-5">
-
-                <div>
-
-                    <h3 class="font-bold text-cyan-400">
-
-                        {{ song.title }}
-
-                    </h3>
-
-                    <p class="text-gray-400">
-
-                        Key: {{ song.music_key }}
-
-                        • Leader: {{ song.leader }}
-
-                    </p>
-
-                </div>
-
-                <span class="bg-yellow-500/20 text-yellow-400 px-3 py-1 rounded-full text-sm">
-
-                    {{ song.category }}
-
-                </span>
+                <img
+                    src="{{ image.image.url }}"
+                    alt="{{ image.title }}"
+                    class="w-full h-72 object-cover hover:scale-110 transition duration-700">
 
             </div>
 
             {% empty %}
 
-            <p>
-
-                No songs available.
-
+            <p class="text-center col-span-full text-slate-400">
+                No gallery images uploaded.
             </p>
 
             {% endfor %}
@@ -349,51 +305,155 @@ class="relative min-h-screen flex items-center justify-center overflow-hidden">
 </section>
 
 
-<!-- Announcements -->
+<!-- ========================= -->
+<!-- MUSIC LIBRARY -->
+<!-- ========================= -->
 
-<section id="announcements" class="py-20 px-6">
+<section id="music" class="py-20 surface-bg px-6">
 
-    <div class="max-w-4xl mx-auto">
+    <div class="max-w-6xl mx-auto">
 
-        <h2 class="font-display text-4xl text-center mb-12">
+        <div class="text-center mb-14">
 
-            Announcements
+            <h2 class="font-display text-4xl text-yellow-400">
 
-        </h2>
+                Music Library
+
+            </h2>
+
+            <p class="text-slate-400 mt-4">
+
+                Songs currently ministered by Zion Melodies Band.
+
+            </p>
+
+        </div>
 
         <div class="space-y-5">
 
+            {% for song in music %}
+
+            <div class="rounded-xl bg-slate-900/60 border border-yellow-400/20 p-6 hover:border-yellow-400 transition">
+
+                <div class="flex flex-col md:flex-row justify-between gap-4">
+
+                    <div>
+
+                        <h3 class="text-2xl font-bold text-cyan-400">
+
+                            {{ song.title }}
+
+                        </h3>
+
+                        <p class="text-slate-400 mt-2">
+
+                            Worship Leader:
+                            <span class="text-white">
+                                {{ song.leader }}
+                            </span>
+
+                        </p>
+
+                        <p class="text-slate-400">
+
+                            Key:
+                            <span class="text-yellow-400">
+                                {{ song.music_key }}
+                            </span>
+
+                        </p>
+
+                    </div>
+
+                    <div class="flex items-center">
+
+                        <span class="px-5 py-2 rounded-full bg-yellow-400/10 text-yellow-400 border border-yellow-400/30">
+
+                            {{ song.category }}
+
+                        </span>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            {% empty %}
+
+            <div class="text-center text-slate-400">
+
+                No songs available.
+
+            </div>
+
+            {% endfor %}
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ========================= -->
+<!-- ANNOUNCEMENTS -->
+<!-- ========================= -->
+
+<section id="announcements" class="py-20 px-6">
+
+    <div class="max-w-5xl mx-auto">
+
+        <div class="text-center mb-14">
+
+            <h2 class="font-display text-4xl text-yellow-400">
+
+                Latest Announcements
+
+            </h2>
+
+            <p class="text-slate-400 mt-4">
+
+                Stay updated with upcoming rehearsals,
+                ministry notices and special programs.
+
+            </p>
+
+        </div>
+
+        <div class="space-y-6">
+
             {% for announcement in announcements %}
 
-            <div class="surface-bg rounded-xl p-6 border-l-4 border-yellow-400">
+            <div class="rounded-2xl border-l-4 border-yellow-400 bg-slate-900/60 p-7">
 
-                <h3 class="text-xl font-bold">
+                <h3 class="text-2xl font-bold">
 
                     {{ announcement.title }}
 
                 </h3>
 
-                <p class="mt-3 text-dark">
+                <p class="mt-4 leading-8 text-slate-300">
 
                     {{ announcement.messages }}
 
                 </p>
 
-                <small class="text-gray-400">
+                <div class="mt-5 text-sm text-cyan-400">
 
-                    {{ announcement.submitted_at|date:"M d, Y H:i" }}
+                    {{ announcement.submitted_at|date:"M d, Y • H:i" }}
 
-                </small>
+                </div>
 
             </div>
 
             {% empty %}
 
-            <p>
+            <div class="text-center text-slate-400">
 
                 No announcements available.
 
-            </p>
+            </div>
 
             {% endfor %}
 
@@ -402,6 +462,7 @@ class="relative min-h-screen flex items-center justify-center overflow-hidden">
     </div>
 
 </section>
+
 
     <!-- ========================= -->
 <!-- MEMBERS DIRECTORY -->
