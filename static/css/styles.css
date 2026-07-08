@@ -576,77 +576,91 @@ max-width:1200px;
 
     }
 
-/* =====================================
-   Gallery Slider - Mobile First
-===================================== */
+/* ==========================================
+   GALLERY - Mobile First
+========================================== */
 
 .gallery-slider{
-    display:grid;
-
-    grid-auto-flow:column;
-    grid-template-rows:repeat(2, 180px);
-
-    grid-auto-columns:calc(50% - 8px);
-
-    gap:16px;
-
+    display:flex;
     overflow-x:auto;
-    overflow-y:hidden;
-
+    gap:12px;
     scroll-snap-type:x mandatory;
     scroll-behavior:smooth;
-
     -webkit-overflow-scrolling:touch;
 
-    padding-bottom:10px;
+    scrollbar-width:none;
 }
-
-/* Hide scrollbar */
 
 .gallery-slider::-webkit-scrollbar{
     display:none;
 }
 
-.gallery-slider{
-    scrollbar-width:none;
-}
-
+/* Each slide contains a 2×2 grid */
 .gallery-item{
+    flex:0 0 100%;
     scroll-snap-align:start;
+
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:12px;
 }
 
-.gallery-img{
+.gallery-item img{
     width:100%;
-    height:100%;
+    height:140px;
     object-fit:cover;
     border-radius:16px;
-    transition:.35s;
+    transition:.3s;
 }
 
-.gallery-img:hover{
-    transform:scale(1.04);
+.gallery-item img:hover{
+    transform:scale(1.03);
 }
 
-/* ===== Tablet ===== */
+/* ==========================
+   Tablet
+========================== */
 
 @media (min-width:768px){
 
-.gallery-slider{
+.gallery-item{
+    flex:0 0 50%;
+}
 
-    grid-auto-columns:calc(33.333% - 11px);
-
+.gallery-item img{
+    height:180px;
 }
 
 }
 
-/* ===== Desktop ===== */
+/* ==========================
+   Desktop
+========================== */
 
 @media (min-width:992px){
 
-.gallery-slider{
+.gallery-item{
+    flex:0 0 33.333%;
+}
 
-    grid-auto-columns:calc(25% - 12px);
+.gallery-item img{
+    height:200px;
+}
 
+}
+
+/* ==========================
+   Large Screens
+========================== */
+
+@media (min-width:1200px){
+
+.gallery-item{
+    flex:0 0 25%;
+}
+
+.gallery-item img{
+    height:220px;
 }
 
 }
