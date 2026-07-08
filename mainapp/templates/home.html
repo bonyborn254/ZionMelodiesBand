@@ -353,8 +353,7 @@ No upcoming events.
                 <thead>
 
                     <tr class="bg-yellow-500/10">
-
-                        <th class="p-4 text-left">Photo</th>
+                        
                         <th class="p-4 text-left">Name</th>
                         <th class="p-4 text-left">Role</th>
                         <th class="p-4 text-left">Section</th>
@@ -368,24 +367,7 @@ No upcoming events.
                     {% for member in members %}
 
                     <tr class="border-t border-white/10">
-
-                        <td class="p-3">
-
-                            {% if member.photo %}
-
-                            <img src="{{ member.photo.url }}"
-                                 class="w-14 h-14 rounded-full object-cover">
-
-                            {% else %}
-
-                            <div class="w-14 h-14 rounded-full bg-gray-700 flex items-center justify-center">
-                                👤
-                            </div>
-
-                            {% endif %}
-
-                        </td>
-
+                        
                         <td class="p-4">
                             {{ member.name }}
                         </td>
