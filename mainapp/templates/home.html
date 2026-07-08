@@ -333,4 +333,193 @@ No upcoming events.
     </div>
 
 </section>
+
+    <!-- ========================= -->
+<!-- MEMBERS DIRECTORY -->
+<!-- ========================= -->
+
+<section id="members" class="py-20 px-6 surface-bg">
+
+    <div class="max-w-6xl mx-auto">
+
+        <h2 class="font-display text-4xl text-center mb-12">
+            Members Directory
+        </h2>
+
+        <div class="overflow-x-auto">
+
+            <table class="w-full border border-white/10 rounded-xl">
+
+                <thead>
+
+                    <tr class="bg-yellow-500/10">
+
+                        <th class="p-4 text-left">Photo</th>
+                        <th class="p-4 text-left">Name</th>
+                        <th class="p-4 text-left">Role</th>
+                        <th class="p-4 text-left">Section</th>
+
+                    </tr>
+
+                </thead>
+
+                <tbody>
+
+                    {% for member in members %}
+
+                    <tr class="border-t border-white/10">
+
+                        <td class="p-3">
+
+                            {% if member.photo %}
+
+                            <img src="{{ member.photo.url }}"
+                                 class="w-14 h-14 rounded-full object-cover">
+
+                            {% else %}
+
+                            <div class="w-14 h-14 rounded-full bg-gray-700 flex items-center justify-center">
+                                👤
+                            </div>
+
+                            {% endif %}
+
+                        </td>
+
+                        <td class="p-4">
+                            {{ member.name }}
+                        </td>
+
+                        <td class="p-4 text-yellow-400">
+                            {{ member.role }}
+                        </td>
+
+                        <td class="p-4">
+                            {{ member.section }}
+                        </td>
+
+                    </tr>
+
+                    {% empty %}
+
+                    <tr>
+
+                        <td colspan="4" class="text-center p-6">
+
+                            No members available.
+
+                        </td>
+
+                    </tr>
+
+                    {% endfor %}
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ========================= -->
+<!-- SUPPORT -->
+<!-- ========================= -->
+
+<section id="support" class="py-20 px-6">
+
+    <div class="max-w-4xl mx-auto text-center">
+
+        <h2 class="font-display text-4xl text-yellow-400">
+
+            Support Our Ministry
+
+        </h2>
+
+        <p class="mt-6">
+
+            Every contribution helps Zion Melodies continue
+            spreading the Gospel through music.
+
+        </p>
+
+        <div class="mt-10 bg-yellow-500/10 border border-yellow-400 rounded-xl p-8">
+
+            <h3 class="text-xl font-bold">
+
+                M-Pesa Buy Goods Till
+
+            </h3>
+
+            <p class="text-5xl text-yellow-400 font-bold mt-3">
+
+                6953474
+
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+    
+<!-- CONTACT -->
+<section id="contact" class="py-20 px-6 surface-bg">
+
+    <div class="max-w-5xl mx-auto grid md:grid-cols-2 gap-10">
+
+        <div>
+
+            <h2 class="font-display text-4xl">
+
+                Contact Us
+
+            </h2>
+
+            <p class="mt-4">
+
+                We'd love to hear from you.
+
+            </p>
+
+            <div class="mt-8 space-y-3">
+
+                <p>📧 zmelodiesband@gmail.com</p>
+
+                <p>📞 +254741386481</p>
+
+                <p>📍 Nairobi, Kenya</p>
+
+            </div>
+
+        </div>
+
+        <div>
+
+            <form method="POST">
+
+                {% csrf_token %}
+
+                {{ form.as_p }}
+
+                <button
+                    type="submit"
+                    class="w-full bg-yellow-500 hover:bg-yellow-400 text-black font-bold py-3 rounded-lg mt-4">
+
+                    Send Message
+
+                </button>
+
+            </form>
+
+        </div>
+
+    </div>
+
+</section>
+
+{% endblock %}
 {% endblock %}
