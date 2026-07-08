@@ -16,16 +16,27 @@ document.addEventListener("DOMContentLoaded", function () {
     // ===============================
     const body = document.body;
     const toggle = document.getElementById("dark-toggle");
+    const themeIcon = document.getElementById("theme-icon");
+
+    function updateThemeIcon() {
+        if (!themeIcon) return;
+
+        const isLight = body.classList.contains("light");
+        themeIcon.setAttribute("data-lucide", isLight ? "sun" : "moon");
+
+        if (typeof lucide !== "undefined") {
+            lucide.createIcons();
+        }
+    }
 
     if (toggle) {
         toggle.addEventListener("click", () => {
             body.classList.toggle("dark");
             body.classList.toggle("light");
 
-            localStorage.setItem(
-                "theme",
-                body.classList.contains("light") ? "light" : "dark"
-            );
+            const isLight = body.classList.contains("light");
+            localStorage.setItem("theme", isLight ? "light" : "dark");
+            updateThemeIcon();
         });
     }
 
@@ -33,7 +44,12 @@ document.addEventListener("DOMContentLoaded", function () {
     if (savedTheme === "light") {
         body.classList.remove("dark");
         body.classList.add("light");
+    } else {
+        body.classList.remove("light");
+        body.classList.add("dark");
     }
+
+    updateThemeIcon();
 
     // ===============================
     // Mobile Navigation
@@ -132,60 +148,51 @@ document.addEventListener("DOMContentLoaded", function () {
 
     if (form) {
 
-        form.addEventListener("submit", async function(e){
+        const successMessage = document.getElementById("form-success");
+        const errorMessage = document.getElementById("form-error");
+
+        form.addEventListener("submit", async function (e) {
 
             e.preventDefault();
 
             const submitBtn = document.getElementById("submit-btn");
 
             submitBtn.disabled = true;
+            successMessage.classList.add("hidden");
+            errorMessage.classList.add("hidden");
 
             const data = {
-
                 name: document.getElementById("name").value,
                 email: document.getElementById("email").value,
                 phone: document.getElementById("phone").value,
                 message: document.getElementById("message").value
-
             };
 
-            try{
-
-                const response = await fetch("/contact/",{
-
-                    method:"POST",
-
-                    headers:{
-                        "Content-Type":"application/json",
-                        "X-CSRFToken":getCookie("csrftoken")
+            try {
+                const response = await fetch(form.action, {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                        "X-CSRFToken": getCookie("csrftoken")
                     },
-
-                    body:JSON.stringify(data)
-
+                    body: JSON.stringify(data)
                 });
 
                 const result = await response.json();
 
-                if(result.success){
-
-                    alert("Message sent successfully.");
-
+                if (result.success) {
+                    successMessage.classList.remove("hidden");
                     form.reset();
-
-                }else{
-
-                    alert(result.error || "Unable to send message.");
-
+                } else {
+                    errorMessage.textContent = result.error || "Unable to send message.";
+                    errorMessage.classList.remove("hidden");
                 }
-
-            }catch(err){
-
-                alert("Server error.");
-
+            } catch (err) {
+                errorMessage.textContent = "Server error. Please try again later.";
+                errorMessage.classList.remove("hidden");
             }
 
             submitBtn.disabled = false;
-
         });
 
     }

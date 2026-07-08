@@ -10,13 +10,13 @@ Zion Melodies Band
 <!-- Hero Section -->
 
 <header id="home"
-class="relative w-full min-h-screen flex items-center justify-center text-center">
+class="relative w-full min-h-[85vh] flex items-center justify-center text-center">
 
     <div class="absolute inset-0">
 
         <!-- Replace with your own hero image -->
         <img src="{% static 'images/hero.jpg' %}"
-             class="w-full h-50 object-cover opacity-40">
+             class="w-full h-full object-cover opacity-40">
 
     </div>
 
@@ -122,7 +122,7 @@ lives across the world.
 <div>
 
 <img src="{% static 'images/about.jpg' %}"
-class="rounded-2xl shadow-xl w-full">
+class="rounded-2xl shadow-xl w-full h-96 md:h-[520px] object-cover">
 
 </div>
 
@@ -304,15 +304,15 @@ No upcoming events.
 
                 </h3>
 
-                <p class="mt-3" "text-dark">
+                <p class="mt-3 text-dark">
 
-                    {{ announcement.message }}
+                    {{ announcement.messages }}
 
                 </p>
 
                 <small class="text-gray-400">
 
-                    {{ announcement.created|date:"M d, Y H:i" }}
+                    {{ announcement.submitted_at|date:"M d, Y H:i" }}
 
                 </small>
 
@@ -489,8 +489,7 @@ No upcoming events.
 
                 <p>📧 zmelodiesband@gmail.com</p>
 
-                <p>📞 <span>+254 741 386481,+254754060776</span></p>
-            </p>
+                <p>📞 <span>+254 741 386481, +254 754 060 776</span></p>
 
                 <p>📍 Nairobi, Kenya</p>
 
@@ -500,13 +499,20 @@ No upcoming events.
 
         <div>
 
-            <form method="POST">
+            <form id="contact-form" action="{% url 'home' %}" method="POST">
 
                 {% csrf_token %}
+
+                <div id="form-success" class="hidden text-green-600 bg-green-100 border border-green-300 rounded-lg p-4 mb-4">
+                    Your message has been sent successfully.
+                </div>
+
+                <div id="form-error" class="hidden text-red-600 bg-red-100 border border-red-300 rounded-lg p-4 mb-4"></div>
 
                 {{ form.as_p }}
 
                 <button
+                    id="submit-btn"
                     type="submit"
                     class="w-full bg-yellow-500 hover:bg-yellow-400 text-black font-bold py-3 rounded-lg mt-4">
 

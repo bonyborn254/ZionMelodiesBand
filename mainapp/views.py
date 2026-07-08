@@ -1,3 +1,6 @@
+import json
+
+from django.http import JsonResponse
 from django.shortcuts import render, redirect
 from django.contrib import messages
 from .models import (
@@ -19,6 +22,23 @@ def home(request):
     members = Member.objects.all()
 
     if request.method == "POST":
+        if request.content_type and request.content_type.startswith("application/json"):
+            try:
+                payload = json.loads(request.body.decode("utf-8"))
+            except json.JSONDecodeError:
+                return JsonResponse({"success": False, "error": "Invalid JSON payload."}, status=400)
+
+            form = ContactForm(payload)
+
+            if form.is_valid():
+                form.save()
+                return JsonResponse({"success": True})
+
+            return JsonResponse(
+                {"success": False, "errors": form.errors.get_json_data()},
+                status=400
+            )
+
         form = ContactForm(request.POST)
 
         if form.is_valid():
