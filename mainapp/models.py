@@ -40,7 +40,7 @@ class Song(models.Model):
 
 class Announcement(models.Model):
     title = models.CharField(max_length=200)
-    message = models.TextField()
+    messages = models.TextField()
     submitted_at = models.DateTimeField(auto_now_add=True)
 
     class Meta:

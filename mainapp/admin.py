@@ -65,6 +65,7 @@ class ContactMessageAdmin(admin.ModelAdmin):
         "name",
         "email",
         "phone",
+        "message",
         "submitted_at",
     )
     ordering = ("-submitted_at",)
