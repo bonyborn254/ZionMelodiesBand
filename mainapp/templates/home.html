@@ -184,38 +184,39 @@ No upcoming events.
 {% endfor %}
 </div>
     
-<!-- Gallery -->
-<section id="gallery" class="py-20 px-6">
-
-    <div class="max-w-6xl mx-auto">
-
-        <h2 class="font-display text-4xl text-center mb-12">
-            Photo Gallery
-        </h2>
-
-        <div class="gallery-slider">
-
-            {% for image in gallery %}
-
-            <div class="gallery-card">
-
-                <img src="{{ image.image.url }}"
-                     alt="{{ image.title }}"
-                     class="gallery-img">
-
-            </div>
-
-            {% empty %}
-
-            <p>No gallery images uploaded.</p>
-
-            {% endfor %}
-
-        </div>
-
-    </div>
-
-</section>
+<!-- Gallery -->  
+  
+<section id="gallery" class="py-20 px-6">  
+  
+    <div class="max-w-6xl mx-auto">  
+  
+        <h2 class="font-display text-4xl text-center mb-12">  
+            Photo Gallery  
+        </h2>  
+  
+        <div class="grid grid-cols-2 md:grid-cols-3 gap-4">  
+  
+            {% for image in gallery %}  
+  
+            <div>  
+  
+                <img src="{{ image.image.url }}"  
+                     alt="{{ image.title }}"  
+                     class="gallery-img rounded-xl w-full h-56 object-cover">  
+  
+            </div>  
+  
+            {% empty %}  
+  
+            <p>No gallery images uploaded.</p>  
+  
+            {% endfor %}  
+  
+        </div>  
+  
+    </div>  
+  
+</section> 
 
 <!-- Music Library -->
 
