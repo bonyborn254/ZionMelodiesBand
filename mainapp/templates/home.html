@@ -184,61 +184,153 @@ No upcoming events.
 {% endfor %}
 </div>
 
+<!-- Gallery -->
+
+<section id="gallery" class="py-20 px-6">
+
+    <div class="max-w-6xl mx-auto">
+
+        <h2 class="font-display text-4xl text-center mb-12">
+            Photo Gallery
+        </h2>
+
+        <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
+
+            {% for image in gallery %}
+
+            <div>
+
+                <img src="{{ image.image.url }}"
+                     alt="{{ image.title }}"
+                     class="gallery-img rounded-xl w-full h-56 object-cover">
+
+            </div>
+
+            {% empty %}
+
+            <p>No gallery images uploaded.</p>
+
+            {% endfor %}
+
+        </div>
+
+    </div>
+
 </section>
-<section id="gallery">
 
-<div class="grid md:grid-cols-3 gap-4">
 
-{% for photo in gallery %}
+<!-- Music Library -->
 
-<img
-src="{{ photo.image.url }}"
-alt="{{ photo.title }}"
-class="gallery-img rounded-xl">
+<section id="music" class="py-20 px-6 surface-bg">
 
-{% endfor %}
+    <div class="max-w-5xl mx-auto">
 
-</div>
+        <h2 class="font-display text-4xl text-center mb-12">
+
+            Music Library
+
+        </h2>
+
+        <div class="space-y-4">
+
+            {% for song in songs %}
+
+            <div class="flex justify-between items-center border border-white/10 rounded-xl p-5">
+
+                <div>
+
+                    <h3 class="font-bold text-cyan-400">
+
+                        {{ song.title }}
+
+                    </h3>
+
+                    <p class="text-gray-400">
+
+                        Key: {{ song.music_key }}
+
+                        • Leader: {{ song.leader }}
+
+                    </p>
+
+                </div>
+
+                <span class="bg-yellow-500/20 text-yellow-400 px-3 py-1 rounded-full text-sm">
+
+                    {{ song.category }}
+
+                </span>
+
+            </div>
+
+            {% empty %}
+
+            <p>
+
+                No songs available.
+
+            </p>
+
+            {% endfor %}
+
+        </div>
+
+    </div>
 
 </section>
 
-<section id="music">
 
-{% for song in music %}
+<!-- Announcements -->
 
-<div class="flex justify-between p-4 rounded-lg">
+<section id="announcements" class="py-20 px-6">
 
-<div>
+    <div class="max-w-4xl mx-auto">
 
-<h3>
+        <h2 class="font-display text-4xl text-center mb-12">
 
-{{ song.title }}
+            Announcements
 
-</h3>
+        </h2>
 
-<p>
+        <div class="space-y-5">
 
-Key:
-{{ song.key }}
+            {% for announcement in announcements %}
 
-•
+            <div class="surface-bg rounded-xl p-6 border-l-4 border-yellow-400">
 
-Leader:
-{{ song.leader }}
+                <h3 class="text-xl font-bold">
 
-</p>
+                    {{ announcement.title }}
 
-</div>
+                </h3>
 
-<span>
+                <p class="mt-3">
 
-{{ song.category }}
+                    {{ announcement.message }}
 
-</span>
+                </p>
 
-</div>
+                <small class="text-gray-400">
 
-{% endfor %}
+                    {{ announcement.created|date:"M d, Y H:i" }}
+
+                </small>
+
+            </div>
+
+            {% empty %}
+
+            <p>
+
+                No announcements available.
+
+            </p>
+
+            {% endfor %}
+
+        </div>
+
+    </div>
 
 </section>
 {% endblock %}
