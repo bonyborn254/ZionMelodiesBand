@@ -17,7 +17,22 @@ class EventAdmin(admin.ModelAdmin):
 
 @admin.register(Gallery)
 class GalleryAdmin(admin.ModelAdmin):
-    list_display = ("title",)
+    list_display = ("title", "uploaded_at")
+    search_fields = ("title", "description")
+    list_filter = ("uploaded_at",)
+    readonly_fields = ("uploaded_at",)
+    fieldsets = (
+        ("Media Information", {
+            "fields": ("title", "description")
+        }),
+        ("Files", {
+            "fields": ("image", "media_file"),
+            "description": "Upload an image or media file (video, audio, etc.). At least one file is recommended."
+        }),
+        ("System", {
+            "fields": ("uploaded_at",)
+        })
+    )
 
 
 @admin.register(Song)

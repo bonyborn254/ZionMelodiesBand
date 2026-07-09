@@ -12,21 +12,34 @@ https://docs.djangoproject.com/en/6.0/ref/settings/
 
 from pathlib import Path
 import os
+from django.core.exceptions import ImproperlyConfigured
+from dotenv import load_dotenv
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
+
+# Load environment variables from a .env file in development
+load_dotenv(os.path.join(BASE_DIR, ".env"))
 
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/6.0/howto/deployment/checklist/
 
-# SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = "django-insecure-n(u9*y@21q$urgo+qvjd$=jc-nsx%eau%ruy(v&0@1b5zz8lnk"
+# Read sensitive settings from environment for production readiness
+def get_env(key, default=None):
+    return os.environ.get(key, default)
 
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+# SECURITY: SECRET_KEY must come from env in production
+SECRET_KEY = get_env("DJANGO_SECRET_KEY")
 
-ALLOWED_HOSTS = []
+# DEBUG should be False in production; enable via env when needed
+DEBUG = get_env("DJANGO_DEBUG", "False").lower() == "true"
+
+if not SECRET_KEY:
+    raise ImproperlyConfigured("DJANGO_SECRET_KEY environment variable is required")
+
+# Hosts - set via DJANGO_ALLOWED_HOSTS (comma-separated)
+ALLOWED_HOSTS = get_env("DJANGO_ALLOWED_HOSTS", "").split(",") if get_env("DJANGO_ALLOWED_HOSTS") else []
 
 
 # Application definition
@@ -43,6 +56,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
+    "whitenoise.middleware.WhiteNoiseMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
@@ -58,13 +72,13 @@ TEMPLATES = [
         "BACKEND": "django.template.backends.django.DjangoTemplates",
         "DIRS": [os.path.join(BASE_DIR, ('templates'))],
         "APP_DIRS": True,
-        "OPTIONS": {
-            "context_processors": [
-                "django.template.context_processors.request",
-                "django.contrib.auth.context_processors.auth",
-                "django.contrib.messages.context_processors.messages",
-            ],
-        },
+            "OPTIONS": {
+                "context_processors": [
+                    "django.template.context_processors.request",
+                    "django.contrib.auth.context_processors.auth",
+                    "django.contrib.messages.context_processors.messages",
+                ],
+            },
     },
 ]
 
@@ -74,12 +88,33 @@ WSGI_APPLICATION = "zionmelodiesband.wsgi.application"
 # Database
 # https://docs.djangoproject.com/en/6.0/ref/settings/#databases
 
-DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.sqlite3",
-        "NAME": BASE_DIR / "db.sqlite3",
+if get_env("DATABASE_URL"):
+    try:
+        import dj_database_url
+
+        DATABASES = {
+            "default": dj_database_url.parse(get_env("DATABASE_URL"), conn_max_age=600)
+        }
+    except Exception:
+        raise ImproperlyConfigured("DATABASE_URL is invalid or dj_database_url could not be loaded")
+else:
+    required_db_vars = ["PG_NAME", "PG_USER", "PG_PASSWORD", "PG_HOST", "PG_PORT"]
+    missing = [var for var in required_db_vars if not get_env(var)]
+    if missing:
+        raise ImproperlyConfigured(
+            "Missing required PostgreSQL environment variables: " + ", ".join(missing)
+        )
+
+    DATABASES = {
+        "default": {
+            "ENGINE": "django.db.backends.postgresql",
+            "NAME": get_env("PG_NAME"),
+            "USER": get_env("PG_USER"),
+            "PASSWORD": get_env("PG_PASSWORD"),
+            "HOST": get_env("PG_HOST"),
+            "PORT": get_env("PG_PORT"),
+        }
     }
-}
 
 
 # Password validation
@@ -115,24 +150,58 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.2/howto/static-files/
 
-STATIC_URL = "static/"
-STATICFILES_DIRS = os.path.join(BASE_DIR, 'static'),
+STATIC_URL = "/static/"
+# Project static files
+STATICFILES_DIRS = [os.path.join(BASE_DIR, "static")]
 STATIC_ROOT = BASE_DIR / "staticfiles"
+
+# Use WhiteNoise's compressed manifest static files storage in production
+if not DEBUG:
+    STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 # Media files (User uploads)
 # https://docs.djangoproject.com/en/5.2/topics/files/
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
+# File upload settings - Allow up to 100MB uploads
+DATA_UPLOAD_MAX_MEMORY_SIZE = 104857600  # 100MB in bytes
+FILE_UPLOAD_MAX_MEMORY_SIZE = 104857600  # 100MB in bytes
+FILE_UPLOAD_PERMISSIONS = 0o644
+
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
-CSRF_TRUSTED_ORIGINS = [
-    "https://localhost:8000",
-    "http://localhost:8000"
-]
+CSRF_TRUSTED_ORIGINS = get_env("DJANGO_CSRF_TRUSTED_ORIGINS", "https://localhost:8000,http://localhost:8000").split(",")
+
+# Security headers and cookie settings for production
+SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")
+SESSION_COOKIE_SECURE = True
+CSRF_COOKIE_SECURE = True
+SECURE_SSL_REDIRECT = get_env("DJANGO_SECURE_SSL_REDIRECT", "True") == "True"
+SECURE_HSTS_SECONDS = int(get_env("DJANGO_SECURE_HSTS_SECONDS", "31536000"))
+SECURE_HSTS_INCLUDE_SUBDOMAINS = get_env("DJANGO_SECURE_HSTS_INCLUDE_SUBDOMAINS", "True") == "True"
+SECURE_HSTS_PRELOAD = get_env("DJANGO_SECURE_HSTS_PRELOAD", "True") == "True"
+SECURE_CONTENT_TYPE_NOSNIFF = True
+SECURE_BROWSER_XSS_FILTER = True
+X_FRAME_OPTIONS = "DENY"
+
+# Basic logging configuration
+LOGGING = {
+    "version": 1,
+    "disable_existing_loggers": False,
+    "handlers": {
+        "console": {
+            "class": "logging.StreamHandler",
+        },
+    },
+    "root": {
+        "handlers": ["console"],
+        "level": "INFO",
+    },
+}
 
 LOGIN_REDIRECT_URL = '/'
 LOGOUT_REDIRECT_URL = '/'
