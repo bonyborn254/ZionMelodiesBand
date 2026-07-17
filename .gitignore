@@ -1,10 +1,10 @@
 .env
-.env.*
-!.env.example
+.gitignore
+PostgreSQL
+db.sqlite3
 __pycache__/
 *.py[cod]
 *.pyo
-*.sqlite3
-*.db
+*db.sqlite3
 staticfiles/
 media/
