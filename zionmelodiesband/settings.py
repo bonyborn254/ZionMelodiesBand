@@ -26,20 +26,46 @@ load_dotenv(os.path.join(BASE_DIR, ".env"))
 # See https://docs.djangoproject.com/en/6.0/howto/deployment/checklist/
 
 # Read sensitive settings from environment for production readiness
+
 def get_env(key, default=None):
     return os.environ.get(key, default)
+
+
+def get_env_bool(key, default=False):
+    value = os.environ.get(key)
+    if value is None:
+        return default
+    return str(value).strip().lower() in {"1", "true", "yes", "on"}
+
+
+def get_env_list(key, default=None, sep=","):
+    value = os.environ.get(key)
+    if value is None:
+        return default or []
+    return [item.strip() for item in value.split(sep) if item.strip()]
+
 
 # SECURITY: SECRET_KEY must come from env in production
 SECRET_KEY = get_env("DJANGO_SECRET_KEY")
 
 # DEBUG should be False in production; enable via env when needed
-DEBUG = get_env("DJANGO_DEBUG", "False").lower() == "true"
+DEBUG = get_env_bool("DJANGO_DEBUG", False)
+
+if DEBUG and not SECRET_KEY:
+    SECRET_KEY = "django-insecure-dev-placeholder-key"
 
 if not SECRET_KEY:
-    raise ImproperlyConfigured("DJANGO_SECRET_KEY environment variable is required")
+    raise ImproperlyConfigured(
+        "DJANGO_SECRET_KEY environment variable is required for production"
+    )
 
 # Hosts - set via DJANGO_ALLOWED_HOSTS (comma-separated)
-ALLOWED_HOSTS = get_env("DJANGO_ALLOWED_HOSTS", "").split(",") if get_env("DJANGO_ALLOWED_HOSTS") else []
+ALLOWED_HOSTS = get_env_list(
+    "DJANGO_ALLOWED_HOSTS",
+    default=["localhost", "127.0.0.1", ".pythonanywhere.com"]
+    if DEBUG
+    else [".pythonanywhere.com"],
+)
 
 
 # Application definition
@@ -174,7 +200,14 @@ FILE_UPLOAD_PERMISSIONS = 0o644
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
-CSRF_TRUSTED_ORIGINS = get_env("DJANGO_CSRF_TRUSTED_ORIGINS", "https://localhost:8000,http://localhost:8000").split(",")
+CSRF_TRUSTED_ORIGINS = get_env_list(
+    "DJANGO_CSRF_TRUSTED_ORIGINS",
+    default=[
+        "https://localhost:8000",
+        "http://localhost:8000",
+        "https://*.pythonanywhere.com",
+    ],
+)
 
 # Security headers and cookie settings for production
 SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")
